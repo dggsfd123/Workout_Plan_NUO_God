@@ -3,188 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>健身打卡</title>
+<title>诺神健身打卡</title>
 <style>
   :root {
-    --bg: #0f1115;
-    --card: #1a1d24;
-    --accent: #4ade80;
-    --accent-soft: rgba(74, 222, 128, 0.12);
-    --text: #e8eaed;
-    --muted: #8b8f98;
-    --done: #4b5563;
+    --bg: #0f1115; --card: #1a1d24; --accent: #4ade80;
+    --accent-soft: rgba(74, 222, 128, 0.12); --text: #e8eaed;
+    --muted: #8b8f98; --done: #4b5563; --line: #2a2e37;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 16px;
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; padding: 16px; }
   .app { width: 100%; max-width: 480px; }
-  header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 4px;
-  }
+  .profile { background: var(--card); border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; }
+  .profile .row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+  .profile .field { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .profile input, .profile select { background: #0f1115; color: var(--text); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 8px; font-size: 13px; width: 64px; }
+  .profile select { width: auto; }
+  .profile .bmi { color: var(--accent); font-weight: 700; }
+  .profile .savebar { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .profile button { background: transparent; color: var(--muted); border: 1px solid var(--line);
+    border-radius: 8px; padding: 7px 12px; font-size: 12px; cursor: pointer; }
+  .profile button.primary { color: var(--accent); border-color: var(--accent); }
+  header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
   h1 { font-size: 20px; font-weight: 700; }
-  select {
-    background: var(--card);
-    color: var(--text);
-    border: 1px solid #2a2e37;
-    border-radius: 8px;
-    padding: 6px 8px;
-    font-size: 13px;
-  }
-  .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
-  .banner {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 40px 20px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 700;
-  }
+  select#dateSel { background: var(--card); color: var(--text); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 8px; font-size: 13px; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  .banner { background: var(--card); border-radius: 14px; padding: 40px 20px; text-align: center; font-size: 22px; font-weight: 700; }
   .banner.rest { color: var(--muted); }
   .banner.finish { color: var(--accent); }
-  .progress {
-    height: 8px;
-    background: #2a2e37;
-    border-radius: 999px;
-    overflow: hidden;
-    margin: 12px 0 20px;
-  }
-  .progress > i {
-    display: block;
-    height: 100%;
-    background: var(--accent);
-    width: 0;
-    transition: width .25s ease;
-  }
-  .task {
-    background: var(--card);
-    border: 1px solid transparent;
-    border-radius: 14px;
-    padding: 16px 18px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    cursor: pointer;
-    transition: transform .08s ease, border-color .2s ease;
-  }
+  .progress { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 12px 0 16px; }
+  .progress > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .25s ease; }
+  .topcard { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 16px;
+    padding: 18px 20px; margin-bottom: 14px; cursor: pointer; }
+  .topcard:active { transform: scale(0.99); }
+  .tc-label { color: var(--accent); font-size: 13px; letter-spacing: 2px; margin-bottom: 6px; }
+  .tc-name { font-size: 26px; font-weight: 800; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { background: #0f1115; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; font-size: 12px; color: var(--muted); }
+  .topcard .chip { color: var(--text); }
+  .task { background: var(--card); border: 1px solid transparent; border-radius: 14px; padding: 14px 16px;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform .08s ease; }
   .task:active { transform: scale(0.98); }
-  .task.current { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-  .task.done { opacity: 0.55; }
-  .task.done .label { text-decoration: line-through; color: var(--done); }
-  .check {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    border: 2px solid #3a3f4b;
-    flex: 0 0 auto;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; color: var(--bg);
-  }
+  .task.done { opacity: 0.5; }
+  .task.done .label b, .task.done .label { text-decoration: line-through; color: var(--done); }
+  .check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #3a3f4b; flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--bg); }
   .task.done .check { background: var(--accent); border-color: var(--accent); }
-  .label { font-size: 16px; line-height: 1.4; }
-  .label small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
-  .task.done .label small { color: var(--done); }
-  .hint {
-    background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 16px;
-    font-size: 15px;
-    color: var(--accent);
-  }
-  .hint span { display:block; color: var(--muted); font-size:12px; margin-top:4px; }
-  .reset {
-    margin-top: 18px;
-    width: 100%;
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid #2a2e37;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 13px;
-    cursor: pointer;
-  }
-  .err { color:#f87171; font-size:14px; line-height:1.6; }
-  code { background:#000; padding:2px 6px; border-radius:4px; font-size:12px; }
+  .label { flex: 1; font-size: 15px; line-height: 1.5; }
+  .label b { font-weight: 700; }
+  .editbtn { background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 8px;
+    padding: 6px 9px; font-size: 13px; cursor: pointer; flex: 0 0 auto; }
+  .stats { color: var(--muted); font-size: 12px; text-align: center; margin: 18px 0 8px; opacity: 0.8; }
+  .reset { margin-top: 6px; width: 100%; background: transparent; color: var(--muted); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px; font-size: 13px; cursor: pointer; }
+  .err { color: #f87171; font-size: 14px; line-height: 1.6; }
+  code { background: #000; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center;
+    justify-content: center; padding: 20px; z-index: 50; }
+  .modal.hidden { display: none; }
+  .modal-box { background: var(--card); border-radius: 16px; padding: 20px; width: 100%; max-width: 360px; }
+  .modal-box h3 { font-size: 16px; margin-bottom: 14px; }
+  .modal-box label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+  .modal-box input { width: 100%; background: #0f1115; color: var(--text); border: 1px solid var(--line);
+    border-radius: 8px; padding: 9px 10px; font-size: 14px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .modal-actions button { flex: 1; padding: 11px; border-radius: 10px; font-size: 14px; cursor: pointer;
+    border: 1px solid var(--line); background: transparent; color: var(--text); }
+  .modal-actions button.primary { background: var(--accent); color: #0f1115; border-color: var(--accent); font-weight: 700; }
 </style>
 </head>
 <body>
 <div class="app">
+  <div class="profile">
+    <div class="row">
+      <span class="field">年龄 <input id="pAge" type="text" placeholder="-"></span>
+      <span class="field">身高 <input id="pHeight" type="text" placeholder="cm"></span>
+      <span class="field">体重 <input id="pWeight" type="text" placeholder="kg"></span>
+      <span class="field">BMI <b class="bmi" id="pBmi">-</b></span>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <span class="field">目标
+        <select id="pGoal"><option>增肌</option><option>减脂</option><option>增肌&减脂</option></select>
+      </span>
+    </div>
+    <div class="savebar">
+      <button class="primary" id="btnDownload">保存计划到文件</button>
+      <button id="btnResetLocal">清除本地修改（以 plan.json 为准）</button>
+    </div>
+  </div>
+
   <header>
-    <h1>健身打卡</h1>
+    <h1>诺神健身计划打卡</h1>
     <select id="dateSel"></select>
   </header>
   <div class="sub" id="subtitle"></div>
   <div id="content"></div>
 </div>
 
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <h3>编辑动作</h3>
+    <label>动作</label><input id="mName">
+    <label>重量（留空或 - 表示无）</label><input id="mWeight">
+    <label>次数</label><input id="mReps">
+    <label>组数</label><input id="mSets" type="number" min="1">
+    <label>组间休息</label><input id="mRest">
+    <div class="modal-actions">
+      <button id="mCancel">取消</button>
+      <button class="primary" id="mSave">保存</button>
+    </div>
+  </div>
+</div>
+
 <script>
-const STORAGE_PREFIX = "gym-checkin-";
-let PLAN = null;
+// plan.json 是权威数据源；网页内的修改存在本地“叠加层”，不覆盖文件本身
+const CHECK_PREFIX = "gym-checkin-";
+const EDITS_KEY = "gym-edits-v1";     // { "日期__动作序号": {name,weight,reps,sets,rest} }
+const PROFILE_KEY = "gym-profile-v1";  // { age,height,weight,goal }
+let PLAN = null, currentDate = null, currentTask = null, editDi = -1, editEi = -1;
 
 function todayStr() {
-  const d = new Date();
-  const p = n => String(n).padStart(2, "0");
+  const d = new Date(), p = n => String(n).padStart(2, "0");
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
-
 function loadDone(date) {
-  try { return new Set(JSON.parse(localStorage.getItem(STORAGE_PREFIX + date) || "[]")); }
-  catch { return new Set(); }
+  try { return new Set(JSON.parse(localStorage.getItem(CHECK_PREFIX + date) || "[]")); } catch { return new Set(); }
 }
-function saveDone(date, set) {
-  localStorage.setItem(STORAGE_PREFIX + date, JSON.stringify([...set]));
+function saveDone(date, set) { localStorage.setItem(CHECK_PREFIX + date, JSON.stringify([...set])); }
+function loadEdits() { try { return JSON.parse(localStorage.getItem(EDITS_KEY) || "{}"); } catch { return {}; } }
+function saveEdits(e) { localStorage.setItem(EDITS_KEY, JSON.stringify(e)); }
+function loadProfileEdit() { try { return JSON.parse(localStorage.getItem(PROFILE_KEY) || "null"); } catch { return null; } }
+function saveProfileEdit(p) { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); }
+
+const fmt = v => (v && v !== "-" && v !== "") ? String(v) : "—";
+
+// 把 plan.json 与本地叠加层合并，得到最终使用的计划
+function applyOverrides(base) {
+  const plan = JSON.parse(JSON.stringify(base));
+  const prof = loadProfileEdit();
+  if (prof) {
+    plan.profile = plan.profile || {};
+    Object.keys(prof).forEach(k => { if (prof[k] !== "" && prof[k] != null) plan.profile[k] = prof[k]; });
+  }
+  const edits = loadEdits();
+  Object.keys(edits).forEach(key => {
+    const [date, ei] = key.split("__");
+    const di = (plan.days || []).findIndex(d => d.date === date);
+    if (di < 0) return;
+    const ex = plan.days[di].exercises && plan.days[di].exercises[+ei];
+    if (ex) Object.assign(ex, edits[key]);
+  });
+  return plan;
 }
 
-// 把一天的训练展开成“每组一条”的任务列表
 function buildTasks(day) {
   const tasks = [];
-  day.exercises.forEach((ex, ei) => {
+  (day.exercises || []).forEach((ex, ei) => {
     const sets = parseInt(ex.sets, 10) || 1;
     for (let s = 1; s <= sets; s++) {
-      tasks.push({
-        id: `${day.date}__${ei}__${s}`,
-        text: `${ex.name}，${ex.weight}，${ex.reps}次，第${s}组，组间休息${ex.rest}`,
-        exercise: ex.name
-      });
+      tasks.push({ id: `${day.date}__${ei}__${s}`, di: PLAN.days.indexOf(day), ei, set: s,
+        exercise: ex.name || "动作", ex });
     }
   });
   return tasks;
 }
-
+function chipsHtml(t) {
+  return `<div class="chips">
+    <span class="chip">第${t.set}组</span>
+    <span class="chip">重量 ${fmt(t.ex.weight)}</span>
+    <span class="chip">次数 ${fmt(t.ex.reps)}</span>
+    <span class="chip">休息 ${fmt(t.ex.rest)}</span>
+  </div>`;
+}
+function nextIncompleteDate() {
+  const dates = PLAN.days.slice().sort((a, b) => a.date.localeCompare(b.date));
+  const today = todayStr();
+  let start = 0;
+  for (let i = 0; i < dates.length; i++) { if (dates[i].date >= today) { start = i; break; } }
+  for (let i = start; i < dates.length; i++) {
+    const d = dates[i];
+    const hasEx = (d.exercises || []).length > 0;
+    if (d.type === "rest" && !hasEx) continue; // 纯休息日：自动跳过，落到下一个有动作的日子
+    const done = loadDone(d.date);
+    if (!buildTasks(d).every(t => done.has(t.id))) return d.date; // 该日还有未打卡动作则停留
+  }
+  // 全部完成：落在今天（若在计划内）或最后一个有动作的日子
+  const inPlan = dates.find(d => d.date === today);
+  const lastHasEx = [...dates].reverse().find(d => (d.exercises || []).length > 0);
+  return inPlan ? today : (lastHasEx ? lastHasEx.date : (dates[0] && dates[0].date));
+}
+function completeCurrent() {
+  if (!currentTask) return;
+  const d = loadDone(currentDate);
+  if (!d.has(currentTask.id)) { d.add(currentTask.id); saveDone(currentDate, d); }
+  render(currentDate);
+}
+function toggle(id) {
+  const d = loadDone(currentDate);
+  if (d.has(id)) d.delete(id); else d.add(id);
+  saveDone(currentDate, d);
+  render(currentDate);
+}
 function render(date) {
+  currentDate = date; currentTask = null;
   const content = document.getElementById("content");
   const sub = document.getElementById("subtitle");
   content.innerHTML = "";
-
-  if (!PLAN) {
-    content.innerHTML = `<div class="err">计划文件 (plan.json) 加载失败。<br>
-      请确保通过本地服务器或 GitHub Pages 打开本页面，而不是直接双击用 <code>file://</code> 打开。</div>`;
-    return;
-  }
-
+  if (!PLAN) { content.innerHTML = `<div class="err">计划文件 (plan.json) 加载失败。<br>请通过本地服务器或 GitHub Pages 打开，不要直接双击用 <code>file://</code> 打开。</div>`; return; }
   const day = (PLAN.days || []).find(d => d.date === date);
-  sub.textContent = PLAN.title || "";
-
-  if (!day) {
-    content.innerHTML = `<div class="banner">今日无训练计划</div>`;
-    return;
-  }
-
-  if (day.type === "rest") {
-    content.innerHTML = `<div class="banner rest">今日休息</div>`;
-    return;
-  }
+  sub.textContent = (PLAN.title || "") + (day && day.title ? " · " + day.title : "");
+  if (!day) { content.innerHTML = `<div class="banner">今日无训练计划</div>`; return; }
+  const hasEx = (day.exercises || []).length > 0;
+  if (day.type === "rest" && !hasEx) { content.innerHTML = `<div class="banner rest">今日休息</div>`; return; }
 
   const tasks = buildTasks(day);
   const done = loadDone(date);
@@ -192,67 +224,121 @@ function render(date) {
   const finished = tasks.filter(t => done.has(t.id)).length;
   const allDone = finished === total;
   const current = tasks.find(t => !done.has(t.id));
+  currentTask = current;
 
-  // 进度条
-  const prog = document.createElement("div");
-  prog.className = "progress";
-  prog.innerHTML = `<i style="width:${(finished / total) * 100}%"></i>`;
-  content.appendChild(prog);
+  content.appendChild(Object.assign(document.createElement("div"), { className: "progress", innerHTML: `<i style="width:${(finished / total) * 100}%"></i>` }));
 
-  // 当前任务提示
   if (allDone) {
-    const b = document.createElement("div");
-    b.className = "banner finish";
-    b.textContent = "今日训练结束";
-    content.appendChild(b);
+    content.appendChild(Object.assign(document.createElement("div"), { className: "banner finish", textContent: "今日训练结束" }));
   } else if (current) {
-    const h = document.createElement("div");
-    h.className = "hint";
-    h.innerHTML = `下一项：${current.exercise}<span>${current.text}</span>`;
-    content.appendChild(h);
+    const card = document.createElement("div");
+    card.className = "topcard"; card.onclick = completeCurrent;
+    card.innerHTML = `<div class="tc-label">下一项</div><div class="tc-name">${current.exercise} · 第${current.set}组</div>${chipsHtml(current)}`;
+    content.appendChild(card);
   }
 
-  // 任务列表（按顺序，未完成的在前方便点击）
-  const ordered = allDone ? tasks : [current, ...tasks.filter(t => t !== current)];
-  ordered.forEach(t => {
+  tasks.filter(t => t !== current).forEach(t => {
     const el = document.createElement("div");
-    el.className = "task" + (done.has(t.id) ? " done" : "") + (t === current ? " current" : "");
+    el.className = "task" + (done.has(t.id) ? " done" : "");
+    el.onclick = () => toggle(t.id);
     el.innerHTML = `<div class="check">${done.has(t.id) ? "✓" : ""}</div>
-                    <div class="label">${t.text}</div>`;
-    el.onclick = () => {
-      const d = loadDone(date);
-      if (d.has(t.id)) d.delete(t.id); else d.add(t.id);
-      saveDone(date, d);
-      render(date);
-    };
+      <div class="label"><b>${t.exercise}</b> 第${t.set}组${chipsHtml(t)}</div>
+      <button class="editbtn" onclick="event.stopPropagation();openEdit(${t.di},${t.ei})">✎</button>`;
     content.appendChild(el);
   });
 
-  // 重置按钮
   const btn = document.createElement("button");
-  btn.className = "reset";
-  btn.textContent = "重置今日打卡";
+  btn.className = "reset"; btn.textContent = "重置今日打卡";
   btn.onclick = () => { saveDone(date, new Set()); render(date); };
   content.appendChild(btn);
+
+  let doneSets = 0;
+  PLAN.days.forEach(d => {
+    if (d.type !== "training") return;
+    buildTasks(d).forEach(t => { if (t.exercise === "拉伸") return; if (loadDone(d.date).has(t.id)) doneSets++; });
+  });
+  const stats = document.createElement("div");
+  stats.className = "stats"; stats.textContent = `本轮训练共完成 ${doneSets} 组`;
+  content.appendChild(stats);
 }
 
+/* 个人信息 */
+function fillProfile() {
+  const p = (PLAN.profile) || {};
+  document.getElementById("pAge").value = p.age || "";
+  document.getElementById("pHeight").value = p.height || "";
+  document.getElementById("pWeight").value = p.weight || "";
+  document.getElementById("pGoal").value = p.goal || "增肌";
+  computeBmi();
+}
+function computeBmi() {
+  const h = parseFloat(document.getElementById("pHeight").value);
+  const w = parseFloat(document.getElementById("pWeight").value);
+  document.getElementById("pBmi").textContent = (h > 0 && w > 0) ? (w / ((h / 100) ** 2)).toFixed(1) : "-";
+}
+function onProfileChange() {
+  PLAN.profile = PLAN.profile || {};
+  PLAN.profile.age = document.getElementById("pAge").value;
+  PLAN.profile.height = document.getElementById("pHeight").value;
+  PLAN.profile.weight = document.getElementById("pWeight").value;
+  PLAN.profile.goal = document.getElementById("pGoal").value;
+  computeBmi();
+  saveProfileEdit(PLAN.profile);
+}
+function downloadPlan() {
+  onProfileChange();
+  const blob = new Blob([JSON.stringify(PLAN, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "plan.json"; a.click();
+}
+
+/* 编辑动作弹窗 */
+function openEdit(di, ei) {
+  editDi = di; editEi = ei;
+  const ex = PLAN.days[di].exercises[ei];
+  document.getElementById("mName").value = ex.name || "";
+  document.getElementById("mWeight").value = ex.weight || "";
+  document.getElementById("mReps").value = ex.reps || "";
+  document.getElementById("mSets").value = ex.sets || 1;
+  document.getElementById("mRest").value = ex.rest || "";
+  document.getElementById("modal").classList.remove("hidden");
+}
+function closeEdit() { document.getElementById("modal").classList.add("hidden"); }
+function saveEdit() {
+  const ex = PLAN.days[editDi].exercises[editEi];
+  ex.name = document.getElementById("mName").value || "动作";
+  ex.weight = document.getElementById("mWeight").value || "-";
+  ex.reps = document.getElementById("mReps").value || "-";
+  ex.sets = parseInt(document.getElementById("mSets").value, 10) || 1;
+  ex.rest = document.getElementById("mRest").value || "-";
+  const edits = loadEdits();
+  edits[`${PLAN.days[editDi].date}__${editEi}`] = { name: ex.name, weight: ex.weight, reps: ex.reps, sets: ex.sets, rest: ex.rest };
+  saveEdits(edits);
+  closeEdit(); render(currentDate);
+}
+
+/* 初始化 */
 function init() {
   const sel = document.getElementById("dateSel");
-  fetch("plan.json")
+  fetch("plan.json", { cache: "no-store" })
     .then(r => r.json())
-    .then(data => {
-      PLAN = data;
+    .then(base => {
+      PLAN = applyOverrides(base);
+      fillProfile();
       const dates = (PLAN.days || []).map(d => d.date).sort();
       sel.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join("");
-      const today = todayStr();
-      sel.value = dates.includes(today) ? today : dates[0];
+      sel.value = nextIncompleteDate();
       render(sel.value);
     })
     .catch(() => render(""));
 
   sel.onchange = () => render(sel.value);
+  ["pAge", "pHeight", "pWeight", "pGoal"].forEach(id => document.getElementById(id).addEventListener("input", onProfileChange));
+  document.getElementById("btnDownload").onclick = downloadPlan;
+  document.getElementById("btnResetLocal").onclick = () => { localStorage.removeItem(EDITS_KEY); localStorage.removeItem(PROFILE_KEY); location.reload(); };
+  document.getElementById("mCancel").onclick = closeEdit;
+  document.getElementById("mSave").onclick = saveEdit;
 }
-
 init();
 </script>
 </body>
