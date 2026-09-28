@@ -68,6 +68,9 @@
   .modal-box label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
   .modal-box input { width: 100%; background: #0f1115; color: var(--text); border: 1px solid var(--line);
     border-radius: 8px; padding: 9px 10px; font-size: 14px; }
+  .setrow { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .setrow .sidx { font-size: 12px; color: var(--muted); width: 44px; flex: 0 0 auto; }
+  .setrow input { flex: 1; min-width: 0; background: #0f1115; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 6px; font-size: 13px; }
   .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
   .modal-actions button { flex: 1; padding: 11px; border-radius: 10px; font-size: 14px; cursor: pointer;
     border: 1px solid var(--line); background: transparent; color: var(--text); }
@@ -106,10 +109,8 @@
   <div class="modal-box">
     <h3>编辑动作</h3>
     <label>动作</label><input id="mName">
-    <label>重量（留空或 - 表示无）</label><input id="mWeight">
-    <label>次数</label><input id="mReps">
-    <label>组数</label><input id="mSets" type="number" min="1">
-    <label>组间休息</label><input id="mRest">
+    <label>组数（每组可单独设重量/次数/休息，用于递增或递减组）</label><input id="mSets" type="number" min="1">
+    <div id="setRows"></div>
     <div class="modal-actions">
       <button id="mCancel">取消</button>
       <button class="primary" id="mSave">保存</button>
@@ -139,6 +140,29 @@ function saveProfileEdit(p) { localStorage.setItem(PROFILE_KEY, JSON.stringify(p
 
 const fmt = v => (v && v !== "-" && v !== "") ? String(v) : "—";
 
+// plan.json 中动作 done:"yes" 作为初始完成状态（仅在本地无记录时播种一次，之后以本地点击为准）
+function seedForDate(date) {
+  const seed = new Set();
+  const day = (PLAN.days || []).find(d => d.date === date);
+  (day ? day.exercises || [] : []).forEach((ex, ei) => {
+    if (ex.done === "yes" || ex.done === "Yes" || ex.done === true) {
+      const sets = parseInt(ex.sets, 10) || 1;
+      for (let s = 1; s <= sets; s++) seed.add(`${date}__${ei}__${s}`);
+    }
+  });
+  return seed;
+}
+function effectiveDone(date, persist = true) {
+  const key = CHECK_PREFIX + date;
+  const raw = localStorage.getItem(key);
+  if (raw === null) {                         // 本地尚无记录：用 plan.json 的 done 播种
+    const seed = seedForDate(date);
+    if (persist) localStorage.setItem(key, JSON.stringify([...seed])); // 仅在实际查看/打卡时落盘
+    return new Set(seed);
+  }
+  try { return new Set(JSON.parse(raw)); } catch { return new Set(); }
+}
+
 // 把 plan.json 与本地叠加层合并，得到最终使用的计划
 function applyOverrides(base) {
   const plan = JSON.parse(JSON.stringify(base));
@@ -158,13 +182,19 @@ function applyOverrides(base) {
   return plan;
 }
 
+// 取某字段的值：标量对全部组生效；数组则按组索引取（缺省取最后一项）
+function valAt(v, i) {
+  if (Array.isArray(v)) return v[i] !== undefined ? v[i] : (v[v.length - 1] ?? "-");
+  return v;
+}
 function buildTasks(day) {
   const tasks = [];
   (day.exercises || []).forEach((ex, ei) => {
     const sets = parseInt(ex.sets, 10) || 1;
     for (let s = 1; s <= sets; s++) {
       tasks.push({ id: `${day.date}__${ei}__${s}`, di: PLAN.days.indexOf(day), ei, set: s,
-        exercise: ex.name || "动作", ex });
+        exercise: ex.name || "动作", ex,
+        w: valAt(ex.weight, s - 1), r: valAt(ex.reps, s - 1), rest: valAt(ex.rest, s - 1) });
     }
   });
   return tasks;
@@ -172,9 +202,9 @@ function buildTasks(day) {
 function chipsHtml(t) {
   return `<div class="chips">
     <span class="chip">第${t.set}组</span>
-    <span class="chip">重量 ${fmt(t.ex.weight)}</span>
-    <span class="chip">次数 ${fmt(t.ex.reps)}</span>
-    <span class="chip">休息 ${fmt(t.ex.rest)}</span>
+    <span class="chip">重量 ${fmt(t.w)}</span>
+    <span class="chip">次数 ${fmt(t.r)}</span>
+    <span class="chip">休息 ${fmt(t.rest)}</span>
   </div>`;
 }
 function nextIncompleteDate() {
@@ -186,7 +216,7 @@ function nextIncompleteDate() {
     const d = dates[i];
     const hasEx = (d.exercises || []).length > 0;
     if (d.type === "rest" && !hasEx) continue; // 纯休息日：自动跳过，落到下一个有动作的日子
-    const done = loadDone(d.date);
+    const done = effectiveDone(d.date, false); // 只读判断，不落盘
     if (!buildTasks(d).every(t => done.has(t.id))) return d.date; // 该日还有未打卡动作则停留
   }
   // 全部完成：落在今天（若在计划内）或最后一个有动作的日子
@@ -219,7 +249,7 @@ function render(date) {
   if (day.type === "rest" && !hasEx) { content.innerHTML = `<div class="banner rest">今日休息</div>`; return; }
 
   const tasks = buildTasks(day);
-  const done = loadDone(date);
+  const done = effectiveDone(date);
   const total = tasks.length;
   const finished = tasks.filter(t => done.has(t.id)).length;
   const allDone = finished === total;
@@ -255,7 +285,7 @@ function render(date) {
   let doneSets = 0;
   PLAN.days.forEach(d => {
     if (d.type !== "training") return;
-    buildTasks(d).forEach(t => { if (t.exercise === "拉伸") return; if (loadDone(d.date).has(t.id)) doneSets++; });
+    buildTasks(d).forEach(t => { if (t.exercise === "拉伸") return; if (effectiveDone(d.date, false).has(t.id)) doneSets++; });
   });
   const stats = document.createElement("div");
   stats.className = "stats"; stats.textContent = `本轮训练共完成 ${doneSets} 组`;
@@ -287,32 +317,62 @@ function onProfileChange() {
 }
 function downloadPlan() {
   onProfileChange();
-  const blob = new Blob([JSON.stringify(PLAN, null, 2)], { type: "application/json" });
+  const copy = JSON.parse(JSON.stringify(PLAN));
+  copy.days.forEach(d => {
+    (d.exercises || []).forEach(ex => {
+      const ei = d.exercises.indexOf(ex);
+      const tasks = buildTasks(d).filter(t => t.ei === ei);
+      const done = effectiveDone(d.date, false); // 只读计算，不把完成状态写进 localStorage
+      ex.done = (tasks.length > 0 && tasks.every(t => done.has(t.id))) ? "yes" : "no";
+    });
+  });
+  const blob = new Blob([JSON.stringify(copy, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = "plan.json"; a.click();
 }
 
-/* 编辑动作弹窗 */
+/* 编辑动作弹窗（逐组编辑，支持递增/递减组） */
+function renderSetRows() {
+  const ex = PLAN.days[editDi].exercises[editEi];
+  const sets = parseInt(document.getElementById("mSets").value, 10) || 1;
+  const box = document.getElementById("setRows");
+  box.innerHTML = "";
+  for (let i = 0; i < sets; i++) {
+    const w = valAt(ex.weight, i), r = valAt(ex.reps, i), rest = valAt(ex.rest, i);
+    const row = document.createElement("div");
+    row.className = "setrow";
+    row.innerHTML = `<span class="sidx">第${i + 1}组</span>
+      <input class="sw" placeholder="重量" value="${w == null ? "" : w}">
+      <input class="sr" placeholder="次数" value="${r == null ? "" : r}">
+      <input class="srest" placeholder="休息" value="${rest == null ? "" : rest}">`;
+    box.appendChild(row);
+  }
+}
 function openEdit(di, ei) {
   editDi = di; editEi = ei;
   const ex = PLAN.days[di].exercises[ei];
   document.getElementById("mName").value = ex.name || "";
-  document.getElementById("mWeight").value = ex.weight || "";
-  document.getElementById("mReps").value = ex.reps || "";
-  document.getElementById("mSets").value = ex.sets || 1;
-  document.getElementById("mRest").value = ex.rest || "";
+  document.getElementById("mSets").value = parseInt(ex.sets, 10) || 1;
   document.getElementById("modal").classList.remove("hidden");
+  renderSetRows();
 }
 function closeEdit() { document.getElementById("modal").classList.add("hidden"); }
+function uniform(arr) { return arr.length > 0 && arr.every(x => x === arr[0]); }
 function saveEdit() {
   const ex = PLAN.days[editDi].exercises[editEi];
   ex.name = document.getElementById("mName").value || "动作";
-  ex.weight = document.getElementById("mWeight").value || "-";
-  ex.reps = document.getElementById("mReps").value || "-";
   ex.sets = parseInt(document.getElementById("mSets").value, 10) || 1;
-  ex.rest = document.getElementById("mRest").value || "-";
+  const W = [], R = [], Rest = [];
+  document.querySelectorAll("#setRows .setrow").forEach(row => {
+    W.push(row.querySelector(".sw").value || "-");
+    R.push(row.querySelector(".sr").value || "-");
+    Rest.push(row.querySelector(".srest").value || "-");
+  });
+  ex.weight = uniform(W) ? W[0] : W;
+  ex.reps = uniform(R) ? R[0] : R;
+  ex.rest = uniform(Rest) ? Rest[0] : Rest;
   const edits = loadEdits();
-  edits[`${PLAN.days[editDi].date}__${editEi}`] = { name: ex.name, weight: ex.weight, reps: ex.reps, sets: ex.sets, rest: ex.rest };
+  edits[`${PLAN.days[editDi].date}__${editEi}`] = { name: ex.name, weight: ex.weight, reps: ex.reps, sets: ex.sets, rest: ex.rest, done: ex.done };
   saveEdits(edits);
   closeEdit(); render(currentDate);
 }
@@ -338,6 +398,7 @@ function init() {
   document.getElementById("btnResetLocal").onclick = () => { localStorage.removeItem(EDITS_KEY); localStorage.removeItem(PROFILE_KEY); location.reload(); };
   document.getElementById("mCancel").onclick = closeEdit;
   document.getElementById("mSave").onclick = saveEdit;
+  document.getElementById("mSets").addEventListener("input", renderSetRows);
 }
 init();
 </script>
