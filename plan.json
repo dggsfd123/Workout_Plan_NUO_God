@@ -8,172 +8,14 @@
   },
   "days": [
     {
-        "date": "2026-10-26",
-        "type": "rest",
-        "title": "周一 休息",
-        "exercises": [
-            { "name": "休息恢复", "weight": "自重", "reps": "0分钟", "sets": 1, "rest": "-", "done": "yes" }
-        ]
-    },
-    {
-      "date": "2026-10-27",
-      "type": "training",
-      "title": "周二 肩 + 腿",
-      "exercises": [
-          { "name": "史密斯深蹲", "weight": ["45kg", "50kg", "50kg", "55kg"], "reps": "10", "sets": 4, "rest": "4min", "done": "no" },
-          { "name": "腿屈伸", "weight": "50kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "腿弯举", "weight": "50kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "小腿提踵", "weight": ["12kg", "16kg", "20kg"], "reps": "15", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "哑铃推肩", "weight": "2*12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "哑铃侧平举", "weight": "2*6kg", "reps": ["15", "15", "12"], "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "面拉", "weight": ["24kg", "24kg", "26kg", "26kg"], "reps": "15", "sets": 4, "rest": "2min", "done": "no" }
-      ]
-    },
-    {
-        "date": "2026-10-28",
-        "type": "rest",
-        "title": "周三 休息",
-        "exercises": [
-            { "name": "休息恢复", "weight": "自重", "reps": "0分钟", "sets": 1, "rest": "-", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-10-29",
-        "type": "training",
-        "title": "周四 背 + 二头",
-        "exercises": [
-            { "name": "引体向上", "weight": "自重", "reps": ["6", "5", "5", "5"], "sets": 4, "rest": "4min", "done": "no" },
-            { "name": "高位下拉", "weight": "40kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "坐姿划船", "weight": "32kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "单臂哑铃划船", "weight": "18kg", "reps": "2*12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "哑铃弯举", "weight": ["6kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "锤式弯举", "weight": ["4kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "徒手死虫式", "weight": "自重", "reps": ["20", "18", "15"], "sets": 3, "rest": "2min", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-10-30",
-        "type": "training",
-        "title": "周五 跑步有氧",
-        "exercises": [
-            { "name": "跑步有氧", "weight": "自重", "reps": "5km", "sets": 1, "rest": "-", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-10-31",
-        "type": "rest",
-        "title": "周六 休息 + 有氧",
-        "exercises": [
-            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-11-01",
-        "type": "training",
-        "title": "周日 胸 + 三头",
-        "exercises": [
-            { "name": "哑铃平板卧推", "weight": "2*16kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
-            { "name": "史密斯平板卧推", "weight": "45kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
-            { "name": "史密斯上斜卧推", "weight": "10kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "器械下斜卧推", "weight": ["36kg", "36kg", "40kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "龙门架夹胸", "weight": ["2*18kg", "2*18kg", "2*18kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "绳索三头下压", "weight": "25kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "过顶三头伸展", "weight": "14kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "屈膝悬垂举腿", "weight": "自重", "reps": ["12", "12", "10"], "sets": 3, "rest": "2min", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-11-02",
-        "type": "rest",
-        "title": "周一 休息 + 有氧",
-        "exercises": [
-            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
-        ]
-    },
-    {
-      "date": "2026-11-03",
-      "type": "training",
-      "title": "周二 肩 + 腿",
-      "exercises": [
-          { "name": "史密斯深蹲", "weight": ["45kg", "45kg", "50kg", "60kg"], "reps": "10", "sets": 4, "rest": "3min", "done": "no" },
-          { "name": "腿屈伸", "weight": "50kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "腿弯举", "weight": "50kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "小腿提踵", "weight": ["12kg", "16kg", "20kg"], "reps": "15", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "哑铃推肩", "weight": "2*12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "哑铃侧平举", "weight": "2*6kg", "reps": ["15", "15", "12"], "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "面拉", "weight": ["24kg", "24kg", "26kg", "26kg"], "reps": "15", "sets": 4, "rest": "2min", "done": "no" }
-      ]
-    },
-    {
-        "date": "2026-11-04",
-        "type": "rest",
-        "title": "周三 休息",
-        "exercises": [
-            { "name": "休息恢复", "weight": "自重", "reps": "0分钟", "sets": 1, "rest": "-", "done": "yes" }
-        ]
-    },
-    {
-        "date": "2026-11-05",
-        "type": "training",
-        "title": "周四 胸 + 三头",
-        "exercises": [
-            { "name": "哑铃平板卧推", "weight": "2*16kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
-            { "name": "史密斯平板卧推", "weight": "45kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
-            { "name": "史密斯上斜卧推", "weight": "10kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "器械下斜卧推", "weight": ["36kg", "36kg", "40kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "龙门架夹胸", "weight": ["2*18kg", "2*18kg", "2*18kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "绳索三头下压", "weight": "25kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "过顶三头伸展", "weight": "14kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "屈膝悬垂举腿", "weight": "自重", "reps": ["12", "12", "10"], "sets": 3, "rest": "2min", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-11-06",
-        "type": "training",
-        "title": "周五 自行车+有氧",
-        "exercises": [
-            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-11-07",
-        "type": "rest",
-        "title": "周六 背 + 二头",
-        "exercises": [
-            { "name": "引体向上", "weight": "自重", "reps": ["6", "5", "5", "5"], "sets": 4, "rest": "4min", "done": "no" },
-            { "name": "高位下拉", "weight": "40kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "坐姿划船", "weight": "32kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "单臂哑铃划船", "weight": "18kg", "reps": "2*12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "哑铃弯举", "weight": ["6kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "锤式弯举", "weight": ["4kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "徒手死虫式", "weight": "自重", "reps": ["20", "18", "15"], "sets": 3, "rest": "2min", "done": "no" }
-        ]
-    },
-    {
-        "date": "2026-11-08",
-        "type": "rest",
-        "title": "周日 休息",
-        "exercises": [
-            { "name": "休息恢复", "weight": "自重", "reps": "0分钟", "sets": 1, "rest": "-", "done": "yes" }
-        ]
-    },
-    {
-        "date": "2026-11-09",
-        "type": "training",
-        "title": "周一 跑步有氧",
-        "exercises": [
-            { "name": "跑步有氧", "weight": "自重", "reps": "5km", "sets": 1, "rest": "-", "done": "no" }
-        ]
-    },
-    {
       "date": "2026-11-10",
       "type": "training",
       "title": "周二 肩 + 腿",
       "exercises": [
-          { "name": "史密斯深蹲", "weight": ["45kg", "45kg", "50kg", "60kg"], "reps": "10", "sets": 4, "rest": "3min", "done": "no" },
-          { "name": "腿屈伸", "weight": "50kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "腿弯举", "weight": "50kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-          { "name": "小腿提踵", "weight": ["12kg", "16kg", "20kg"], "reps": "15", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "史密斯深蹲", "weight": ["50kg", "50kg", "55kg", "55kg"], "reps": "10", "sets": 4, "rest": "3min", "done": "no" },
+          { "name": "腿屈伸", "weight": "55kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "腿弯举", "weight": "55kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "小腿提踵", "weight": ["2*12kg", "2*14kg", "2*16kg"], "reps": "15", "sets": 3, "rest": "2min", "done": "no" },
           { "name": "哑铃推肩", "weight": "2*12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
           { "name": "哑铃侧平举", "weight": "2*6kg", "reps": ["15", "15", "12"], "sets": 3, "rest": "2min", "done": "no" },
           { "name": "面拉", "weight": ["24kg", "24kg", "26kg", "26kg"], "reps": "15", "sets": 4, "rest": "2min", "done": "no" }
@@ -190,16 +32,15 @@
     {
         "date": "2026-11-12",
         "type": "training",
-        "title": "周四 胸 + 三头",
+        "title": "周四 背 + 二头",
         "exercises": [
-            { "name": "哑铃平板卧推", "weight": "2*16kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
-            { "name": "史密斯平板卧推", "weight": "45kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
-            { "name": "史密斯上斜卧推", "weight": "10kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "器械下斜卧推", "weight": ["36kg", "36kg", "40kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "龙门架夹胸", "weight": ["2*18kg", "2*18kg", "2*18kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "绳索三头下压", "weight": "25kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "过顶三头伸展", "weight": "14kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "屈膝悬垂举腿", "weight": "自重", "reps": ["12", "12", "10"], "sets": 3, "rest": "2min", "done": "no" }
+            { "name": "引体向上", "weight": "自重", "reps": ["6", "6", "5", "5"], "sets": 4, "rest": "4min", "done": "no" },
+            { "name": "高位下拉", "weight": "40kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "坐姿划船", "weight": "32kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "单臂哑铃划船", "weight": "20kg", "reps": "2*12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "哑铃弯举", "weight": ["6kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "锤式弯举", "weight": ["4kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "徒手死虫式", "weight": "自重", "reps": ["24", "20", "18"], "sets": 3, "rest": "2min", "done": "no" }
         ]
     },
     {
@@ -213,19 +54,167 @@
     {
         "date": "2026-11-14",
         "type": "rest",
-        "title": "周六 背 + 二头",
+        "title": "周六 胸 + 三头",
         "exercises": [
-            { "name": "引体向上", "weight": "自重", "reps": ["6", "5", "5", "5"], "sets": 4, "rest": "4min", "done": "no" },
-            { "name": "高位下拉", "weight": "40kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "坐姿划船", "weight": "32kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "单臂哑铃划船", "weight": "18kg", "reps": "2*12", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "哑铃弯举", "weight": ["6kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "锤式弯举", "weight": ["4kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
-            { "name": "徒手死虫式", "weight": "自重", "reps": ["20", "18", "15"], "sets": 3, "rest": "2min", "done": "no" }
+            { "name": "哑铃平板卧推", "weight": "2*16kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
+            { "name": "史密斯平板卧推", "weight": "45kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
+            { "name": "史密斯上斜卧推", "weight": "2*10kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "器械下斜卧推", "weight": ["36kg", "36kg", "40kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "龙门架夹胸", "weight": ["2*20kg", "2*20kg", "2*20kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "绳索三头下压", "weight": "25kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "过顶三头伸展", "weight": "12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "屈膝悬垂举腿", "weight": "自重", "reps": ["12", "12", "10"], "sets": 3, "rest": "2min", "done": "no" }
         ]
     },
     {
         "date": "2026-11-15",
+        "type": "rest",
+        "title": "周日 休息",
+        "exercises": [
+            { "name": "休息恢复", "weight": "自重", "reps": "0分钟", "sets": 1, "rest": "-", "done": "yes" }
+        ]
+    },
+    {
+      "date": "2026-11-16",
+      "type": "training",
+      "title": "周一 跑步有氧",
+      "exercises": [
+        { "name": "跑步有氧", "weight": "自重", "reps": "5km", "sets": 1, "rest": "-", "done": "no" },
+        { "name": "哑铃推肩", "weight": "2*12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+        { "name": "哑铃侧平举", "weight": "2*6kg", "reps": ["15", "15", "12"], "sets": 3, "rest": "2min", "done": "no" },
+        { "name": "面拉", "weight": ["24kg", "24kg", "26kg", "26kg"], "reps": "15", "sets": 4, "rest": "2min", "done": "no" }
+      ]
+    },
+    {
+        "date": "2026-11-17",
+        "type": "training",
+        "title": "周二 背 + 二头",
+        "exercises": [
+            { "name": "引体向上", "weight": "自重", "reps": ["6", "6", "5", "5"], "sets": 4, "rest": "4min", "done": "no" },
+            { "name": "高位下拉", "weight": "40kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "坐姿划船", "weight": "32kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "单臂哑铃划船", "weight": "20kg", "reps": "2*12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "哑铃弯举", "weight": ["6kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "锤式弯举", "weight": ["4kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "徒手死虫式", "weight": "自重", "reps": ["24", "20", "18"], "sets": 3, "rest": "2min", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-18",
+        "type": "training",
+        "title": "周三 自行车+有氧",
+        "exercises": [
+            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-19",
+        "type": "rest",
+        "title": "周四 胸 + 三头",
+        "exercises": [
+            { "name": "哑铃平板卧推", "weight": "2*16kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
+            { "name": "史密斯平板卧推", "weight": "45kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
+            { "name": "史密斯上斜卧推", "weight": "2*10kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "器械下斜卧推", "weight": ["36kg", "36kg", "40kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "龙门架夹胸", "weight": ["2*20kg", "2*20kg", "2*20kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "绳索三头下压", "weight": "25kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "过顶三头伸展", "weight": "12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "屈膝悬垂举腿", "weight": "自重", "reps": ["12", "12", "10"], "sets": 3, "rest": "2min", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-20",
+        "type": "training",
+        "title": "周五 自行车+有氧",
+        "exercises": [
+            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-21",
+        "type": "rest",
+        "title": "周六 爬山",
+        "exercises": [
+            { "name": "爬山", "weight": "自重", "reps": "600分钟", "sets": 1, "rest": "-", "done": "yes" }
+        ]
+    },
+    {
+        "date": "2026-11-22",
+        "type": "rest",
+        "title": "周日 休息",
+        "exercises": [
+            { "name": "休息恢复", "weight": "自重", "reps": "0分钟", "sets": 1, "rest": "-", "done": "yes" }
+        ]
+    },
+    {
+      "date": "2026-11-23",
+      "type": "training",
+      "title": "周一 跑步有氧",
+      "exercises": [
+        { "name": "跑步有氧", "weight": "自重", "reps": "5km", "sets": 1, "rest": "-", "done": "no" }
+      ]
+    },
+    {
+        "date": "2026-11-24",
+        "type": "training",
+        "title": "周二 肩 + 腿",
+        "exercises": [
+          { "name": "史密斯深蹲", "weight": ["50kg", "50kg", "55kg", "55kg"], "reps": "10", "sets": 4, "rest": "3min", "done": "no" },
+          { "name": "腿屈伸", "weight": "55kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "腿弯举", "weight": "55kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "小腿提踵", "weight": ["2*12kg", "2*14kg", "2*16kg"], "reps": "15", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "哑铃推肩", "weight": "2*12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "哑铃侧平举", "weight": "2*6kg", "reps": ["15", "15", "12"], "sets": 3, "rest": "2min", "done": "no" },
+          { "name": "面拉", "weight": ["24kg", "24kg", "26kg", "26kg"], "reps": "15", "sets": 4, "rest": "2min", "done": "no" }
+      ]
+    },
+    {
+        "date": "2026-11-25",
+        "type": "training",
+        "title": "周三 自行车+有氧",
+        "exercises": [
+            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
+        ]
+    },
+    {
+      "date": "2026-11-26",
+      "type": "training",
+      "title": "周四 胸 + 三头",
+      "exercises": [
+            { "name": "哑铃平板卧推", "weight": "2*16kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
+            { "name": "史密斯平板卧推", "weight": "45kg", "reps": "10", "sets": 2, "rest": "2min", "done": "no" },
+            { "name": "史密斯上斜卧推", "weight": "2*10kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "器械下斜卧推", "weight": ["36kg", "36kg", "40kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "龙门架夹胸", "weight": ["2*20kg", "2*20kg", "2*20kg"], "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "绳索三头下压", "weight": "25kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "过顶三头伸展", "weight": "12kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "屈膝悬垂举腿", "weight": "自重", "reps": ["12", "12", "10"], "sets": 3, "rest": "2min", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-27",
+        "type": "training",
+        "title": "周五 自行车+有氧",
+        "exercises": [
+            { "name": "自行车有氧", "weight": "自重", "reps": "20分钟", "sets": 1, "rest": "-", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-28",
+        "type": "rest",
+        "title": "周六 背 + 二头",
+        "exercises": [
+            { "name": "引体向上", "weight": "自重", "reps": ["6", "6", "5", "5"], "sets": 4, "rest": "4min", "done": "no" },
+            { "name": "高位下拉", "weight": "40kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "坐姿划船", "weight": "32kg", "reps": "12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "单臂哑铃划船", "weight": "20kg", "reps": "2*12", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "哑铃弯举", "weight": ["6kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "锤式弯举", "weight": ["4kg", "6kg", "6kg"], "reps": "2*15", "sets": 3, "rest": "2min", "done": "no" },
+            { "name": "徒手死虫式", "weight": "自重", "reps": ["24", "20", "18"], "sets": 3, "rest": "2min", "done": "no" }
+        ]
+    },
+    {
+        "date": "2026-11-29",
         "type": "rest",
         "title": "周日 休息",
         "exercises": [
